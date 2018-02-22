@@ -729,10 +729,7 @@ export class Connection {
         // only thing we can do is to return undefined and discard the
         // result of the RPC. If an error occurred then print the error
         // to the console.
-        callback = err => {
-          err &&
-            Meteor._debug("Error invoking Method '" + name + "':", err.message);
-        };
+        callback = (err) => { if (err) throw err; };
       } else {
         // On the server, make the function synchronous. Throw on
         // errors, return on success.

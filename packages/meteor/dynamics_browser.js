@@ -35,13 +35,7 @@ Meteor.bindEnvironment = function (func, onException, _this) {
   var boundValues = currentValues.slice();
 
   if (!onException || typeof(onException) === 'string') {
-    var description = onException || "callback of async function";
-    onException = function (error) {
-      Meteor._debug(
-        "Exception in " + description + ":",
-        error && error.stack || error
-      );
-    };
+    onException = (err) => { if (err) throw err; };
   }
 
   return function (/* arguments */) {
